@@ -10,8 +10,9 @@ print(
                 ).pop()
             )
             for group in batched(
-                [line.strip() for line in open("input").readlines()], 3
+                open("input").read().splitlines(), 3
             )
         ]
     )
 )
+
