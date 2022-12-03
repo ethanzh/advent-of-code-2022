@@ -1,20 +1,14 @@
-with open("input") as f:
-	lines = [line.strip() for line in f.readlines()]
-
-priority_sum = 0
-
-for rucksack_items in lines:
-	length = len(rucksack_items)
-	midpoint_index = length // 2
-	halves = rucksack_items[:midpoint_index], rucksack_items[midpoint_index:]
-	first_half = set(item for item in halves[0])
-	second_half = set(item for item in halves[1])
-
-	duplicate_item = first_half.intersection(second_half).pop()
-
-	if duplicate_item.isupper():
-		priority_sum += ord(duplicate_item) - 38
-	else:
-		priority_sum += ord(duplicate_item) - 96
-
-print(priority_sum)
+print(
+    sum(
+        [
+            (lambda x: ord(x) - (38 if x.isupper() else 96))(x.intersection(y).pop())
+            for x, y in [
+                (
+                    {c for c in items[: len(items) // 2]},
+                    {c for c in items[len(items) // 2 :]},
+                )
+                for items in [line.strip() for line in open("input")]
+            ]
+        ]
+    )
+)
