@@ -6,7 +6,7 @@ print(
         [
             (lambda x: ord(x) - (38 if x.isupper() else 96))(
                 reduce(
-                    lambda x, y: x & y, [set(c for c in items) for items in group]
+                    lambda x, y: x & y, [{c for c in items} for items in group]
                 ).pop()
             )
             for group in batched(
