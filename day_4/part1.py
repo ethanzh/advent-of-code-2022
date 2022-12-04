@@ -1,9 +1,6 @@
-lines = open("input").read().splitlines()
-
-
 def contains(first, second) -> bool:
-    first_lhs, first_rhs = [int(n) for n in first.split("-")]
-    second_lhs, second_rhs = [int(n) for n in second.split("-")]
+    first_lhs, first_rhs = (int(n) for n in first.split("-"))
+    second_lhs, second_rhs = (int(n) for n in second.split("-"))
 
     first_range = range(first_lhs, first_rhs + 1)
     second_range = range(second_lhs, second_rhs + 1)
@@ -13,11 +10,6 @@ def contains(first, second) -> bool:
     )
 
 
-total = 0
-for line in lines:
-    first, second = line.split(",")
-    if not contains(first, second):
-        continue
-    total += 1
-
-print(total)
+print(
+    sum([int(contains(*line.split(","))) for line in open("input").read().splitlines()])
+)
